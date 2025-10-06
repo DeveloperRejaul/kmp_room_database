@@ -1,7 +1,7 @@
+package com.example.kmp_room_database.core.database.todo
+
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-
-// shared/src/commonMain/kotlin/TodoEntity.kt
 
 @Entity
 data class TodoEntity(

@@ -1,11 +1,11 @@
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.kmp_room_database.core.database.AppDatabase
 import kotlinx.cinterop.ExperimentalForeignApi
 import platform.Foundation.NSDocumentDirectory
 import platform.Foundation.NSFileManager
 import platform.Foundation.NSUserDomainMask
 
-// shared/src/iosMain/kotlin/Database.ios.kt
 
 fun getDatabaseBuilder(): RoomDatabase.Builder<AppDatabase> {
     val dbFilePath = documentDirectory() + "/my_room.db"

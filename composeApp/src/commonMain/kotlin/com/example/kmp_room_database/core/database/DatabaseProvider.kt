@@ -1,6 +1,7 @@
+package com.example.kmp_room_database.core.database
+
 import androidx.room.RoomDatabase
 
-// shared/src/commonMain/kotlin/DatabaseProvider.kt
 object DatabaseProvider {
     private var instance: AppDatabase? = null
 

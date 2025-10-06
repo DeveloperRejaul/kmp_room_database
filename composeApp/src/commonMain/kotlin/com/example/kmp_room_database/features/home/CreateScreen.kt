@@ -1,4 +1,5 @@
-package com.example.kmp_room_database
+package com.example.kmp_room_database.features.home
+
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -15,20 +16,30 @@ import androidx.compose.material3.TextField
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.example.kmp_room_database.LocalDatabase
+import com.example.kmp_room_database.core.assets.icon.Icons
+import com.example.kmp_room_database.core.database.todo.TodoEntity
+import com.example.kmp_room_database.core.navigation.Routes
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun  CreateScreen(navController: NavHostController) {
-    val title = mutableStateOf("")
-    val content = mutableStateOf("")
+fun  CreateScreen(navController: NavHostController, params: Routes.Create) {
+    val title = mutableStateOf(params.title ?: "")
+    val content = mutableStateOf(params.content ?: "")
+    val dao = LocalDatabase.current.getDao()
+    val scope = rememberCoroutineScope()
+
+
     Scaffold (
         topBar = {
             TopAppBar(
                 title = {
-                    Text("Create")
+                    Text(if(params.isEmpty()) "Create" else "Update")
                 },
                 navigationIcon = {
                     IconButton( onClick = {
@@ -56,13 +67,23 @@ fun  CreateScreen(navController: NavHostController) {
             )
             Spacer(modifier = Modifier.height(10.dp))
             Button(
-                onClick = {},
+                onClick = {
+                    scope.launch {
+                        if(params.isEmpty()) {
+                            dao.insert(TodoEntity(title = title.value, content = content.value))
+                        } else {
+                            if(params.id != null) {
+                                dao.update(TodoEntity(id = params.id, title = title.value, content = content.value))
+                            }
+                        }
+                        navController.popBackStack()
+                    }
+                },
                 modifier = Modifier.fillMaxWidth().height(50.dp),
                 shape = RoundedCornerShape(5.dp)
             ){
-                Text("Create")
+                Text(if(params.isEmpty()) "Create" else "Update")
             }
         }
     }
-
 }

@@ -1,8 +1,8 @@
 import android.content.Context
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.kmp_room_database.core.database.AppDatabase
 
-// shared/src/androidMain/kotlin/Database.android.kt
 
 fun getDatabaseBuilder(context: Context): RoomDatabase.Builder<AppDatabase> {
     val appContext = context.applicationContext

@@ -1,8 +1,12 @@
+package com.example.kmp_room_database.core.database
+
 import androidx.room.ConstructedBy
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.RoomDatabaseConstructor
 import androidx.sqlite.driver.bundled.BundledSQLiteDriver
+import com.example.kmp_room_database.core.database.todo.TodoDao
+import com.example.kmp_room_database.core.database.todo.TodoEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 
